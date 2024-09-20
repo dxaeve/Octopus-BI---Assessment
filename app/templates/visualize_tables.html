@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Table Structure</title>
+{% endblock %}
+
+{% block body %}
+<h1 class="text-3xl font-bold mb-4 text-center"><span class="text-red-800"><a href="{% url 'table_struct' %}">Database Table Structure</a></span> | <span><a href="{% url 'index' %}">Full Data Overview</a></span></h1>
+<div class="flex flex-wrap gap-12 mx-10 my-10 border p-10 justify-center">
+    {% for table_name, columns in table_data.items %}
+        <div class="shadow-lg border border-gray-500 p-5 min-w-96 flex flex-col items-center">
+            <h2 class="text-2xl font-semibold mb-2 text-blue-900">{{ table_name }}</h2>
+            <ul class="ms-5 list-disc">
+                {% for column in columns %}
+                    <li class="text-gray-600">{{ column }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

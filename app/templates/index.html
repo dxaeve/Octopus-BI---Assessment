@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Full Data Visualization</title>
+{% endblock %}
+
+{% block body %}
+<div class="container mx-auto p-4">
+    <h1 class="text-3xl font-bold mb-4 text-center"><span><a href="{% url 'table_struct' %}">Database Table Structure</a></span> | <span class="text-red-800"><a href="{% url 'index' %}">Full Data Overview</a></span></h1>
+
+    <table class="table-auto w-full border-collapse border border-gray-400">
+        <thead>
+            <tr class="bg-blue-900 text-white">
+                <th class="border border-gray-300 px-4 py-2">School</th>
+                <th class="border border-gray-300 px-4 py-2">Student</th>
+                <th class="border border-gray-300 px-4 py-2">Class</th>
+                <th class="border border-gray-300 px-4 py-2">Subject</th>
+                <th class="border border-gray-300 px-4 py-2">Student Score</th>
+                <th class="border border-gray-300 px-4 py-2">Average Score</th>
+                <th class="border border-gray-300 px-4 py-2">Correct Answers</th>
+                <th class="border border-gray-300 px-4 py-2">Assessment Area</th>
+                <th class="border border-gray-300 px-4 py-2">Award</th>
+                <th class="border border-gray-300 px-4 py-2">Sydney Percentile</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for summary in summaries %}
+            <tr>
+                <td class="border border-gray-300 px-4 py-2">{{ summary.school.name }}</td>
+                <td class="border border-gray-300 px-4 py-2">{{ summary.student.first_name }} {{ summary.student.last_name }}</td>
+                <td class="border border-gray-300 px-4 py-2">{{ summary.student.student_class.name }}</td>
+                <td class="border border-gray-300 px-4 py-2">{{ summary.subject.subject }}</td>
+                <td class="border border-gray-300 px-4 py-2">{{ summary.student_score }}</td>
+                <td class="border border-gray-300 px-4 py-2">{{ summary.average_score }}</td>
+                <td class="border border-gray-300 px-4 py-2">{{ summary.correct_answer }}</td>
+                <td class="border border-gray-300 px-4 py-2">{{ summary.assessment_area.name }}</td>
+                <td class="border border-gray-300 px-4 py-2">{{ summary.award.name }}</td>
+                <td class="border border-gray-300 px-4 py-2">{{ summary.sydney_percentile }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="10" class="text-center p-4">No data available.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
